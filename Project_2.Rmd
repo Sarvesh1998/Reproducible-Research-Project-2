@@ -2,7 +2,9 @@
 title: "Types of severe weather events which have huge impact on public health and economic problems"
 output: 
       html_document: 
+      
             keep_md: true
+            
 ---
 
 ```{r library,  include=FALSE}
@@ -21,17 +23,19 @@ I'm going to use The U.S. National Oceanic and Atmospheric Administration's (NOA
 
 
 Download file from the Internet:
+
 ```{r, eval=FALSE, cache=TRUE}
 link <- "http://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2"
 download.file(url = link, destfile = "StormData")
 ```
 
 Read a file in table format
+
 ```{r, echo=TRUE, cache=TRUE}
 StormData <- read.csv(bzfile("StormData"),sep = ",",header=TRUE)
 ```
 
-Property damage estimates were entered as actual dollar amounts (the variable PROPDMG). But they were rounded to three significant digits, followed by an alphabetical character signifying the magnitude of the number, i.e., 1.55B for $1,550,000,000. Alphabetical characters used to signify magnitude include “K” for thousands, “M” for millions, and “B” for billions. So I created a new variable PROPDMGEXP2 and assigned conditionally "K" = 1000, "M" = 1000000, "B" = 1000000000, in other cases 1. These variables are multiplied in the next step.
+Property damage estimates were entered as actual dollar amounts (the variable PROPDMG). But they were rounded to three significant digits, followed by an alphabetical character signifying the magnitude of the number, i.e., 1.55B for $1,550,000,000. Alphabetical characters used to signify magnitude include â€œKâ€ for thousands, â€œMâ€ for millions, and â€œBâ€ for billions. So I created a new variable PROPDMGEXP2 and assigned conditionally "K" = 1000, "M" = 1000000, "B" = 1000000000, in other cases 1. These variables are multiplied in the next step.
 
 ```{r, echo=TRUE}
 table(StormData$PROPDMGEXP)
